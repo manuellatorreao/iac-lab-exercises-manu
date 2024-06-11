@@ -8,4 +8,11 @@ terraform {
 }
 provider "aws" {
   region = var.region
+  default_tags {
+    tags = {
+      ManageBy = "Terraform"
+      Project = var.prefix
+      Environment = "Dev"
+    }
+  }
 }

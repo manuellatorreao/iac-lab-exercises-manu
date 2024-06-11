@@ -1,7 +1,6 @@
 resource "aws_s3_bucket" "tfstate" {
   bucket = format("%s-tfstate", var.prefix)
   force_destroy = true  
-
   tags = {
     Name = format("%s-tfstate", var.prefix)
   }
@@ -31,3 +30,4 @@ resource "aws_s3_bucket_public_access_block" "acess_block_tfstate" {
     ignore_public_acls = true
     restrict_public_buckets = true
 }
+
