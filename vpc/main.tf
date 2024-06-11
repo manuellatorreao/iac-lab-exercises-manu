@@ -1,18 +1,3 @@
-module "vpc" {
-  source  = "./vpc"
-
-  name = "${var.prefix}-vpc"
-  prefix  = var.prefix
-  region = var.region
-  vpc_cidr = var.vpc_cidr
-
-  public_subnets  = ["${cidrsubnet(var.vpc_cidr, 3, 0)}", "${cidrsubnet(var.vpc_cidr, 3, 1)}"]
-  private_subnets = ["${cidrsubnet(var.vpc_cidr, 3, 2)}", "${cidrsubnet(var.vpc_cidr, 3, 3)}"]
-  secure_subnets = ["${cidrsubnet(var.vpc_cidr, 3, 4)}", "${cidrsubnet(var.vpc_cidr, 3, 5)}"]
-
-}
-
-
 resource "aws_vpc" "my_vpc" {
   cidr_block = var.vpc_cidr
   tags = {
@@ -110,6 +95,4 @@ resource "aws_route_table_association" "private" {
   subnet_id = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private_route_table[count.index].id
 }
-
-
 
